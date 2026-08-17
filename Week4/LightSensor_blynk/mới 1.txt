@@ -1,0 +1,5 @@
+#define BLYNK_TEMPLATE_ID "TMPL66RWIdLQD"
+#define BLYNK_TEMPLATE_NAME "DemoLightSensor"
+
+#define BLYNK_TEMPLATE_NAME "DemoLightSensor"
+#define BLYNK_AUTH_TOKEN "vlBsnuWMeKKF98BTXCYsIJ089-2WkScy"

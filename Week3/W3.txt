@@ -1,0 +1,6 @@
+Spreadsheet_name: LightSensor
+Spreadsheet_id: 1exxuh7UmKgppRU-rNucNXsZg1NgwiwR7smY7qB0tw2Q
+Sheet name: 
+Deployment ID: AKfycbzcBBAQm_7H9ogrZn8SdklqSAyQCC2oodGfM_huki_qs0nPJK71_K1FoO-3syNVok0x
+Web App URl; https://script.google.com/macros/s/AKfycbzcBBAQm_7H9ogrZn8SdklqSAyQCC2oodGfM_huki_qs0nPJK71_K1FoO-3syNVok0x/exec
+Google Script ID: AKfycbzcBBAQm_7H9ogrZn8SdklqSAyQCC2oodGfM_huki_qs0nPJK71_K1FoO-3syNVok0x

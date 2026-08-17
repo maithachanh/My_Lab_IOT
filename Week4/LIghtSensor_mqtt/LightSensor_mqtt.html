@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LIGHT Sensor MQTT Monitor</title>
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <script>
+
+        //-------------------------
+        // MQTT Configuration
+        //-------------------------
+
+        const MQTT_NAME = "ThachAnh_QuocDuy";
+
+        const topicValue = MQTT_NAME + "/LIGHT/value";
+        const topicUpdated = MQTT_NAME + "/LIGHT/updated";
+
+        const mqttClient = mqtt.connect(
+            "wss://mqtt-dashboard.com:8884/mqtt"
+        );
+
+        //-------------------------
+        // Connected
+        //-------------------------
+
+        mqttClient.on("connect", function () {
+
+            console.log("MQTT Connected");
+
+            document.getElementById("lblStatus").innerHTML =
+                "<font color='green'><b>Connected</b></font>";
+
+            mqttClient.subscribe(topicValue, function (err) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log("Subscribed: " + topicValue);
+            });
+
+            mqttClient.subscribe(topicUpdated, function (err) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log("Subscribed: " + topicUpdated);
+            });
+
+        });
+
+        //-------------------------
+        // Receive Message
+        //-------------------------
+
+        mqttClient.on("message", function (topic, message) {
+
+            console.log("Topic :", topic);
+            console.log("Message :", message.toString());
+
+            if (topic === topicValue) {
+
+                let value = message.toString();
+
+                if (value == "1")
+                    value = "Có ánh sáng";
+                else
+                    value = "Không có ánh sáng";
+
+                document.getElementById("lblValue").innerHTML = value;
+            }
+
+            if (topic === topicUpdated) {
+
+                let epoch = parseInt(message.toString()) * 1000;
+
+                let time = new Date(epoch);
+
+                document.getElementById("lblUpdated").innerHTML =
+                    time.toLocaleString();
+
+            }
+
+        });
+
+        //-------------------------
+        // Error
+        //-------------------------
+
+        mqttClient.on("error", function (err) {
+
+            console.log("MQTT Error");
+            console.log(err);
+
+            document.getElementById("lblStatus").innerHTML =
+                "<font color='red'><b>Error</b></font>";
+
+        });
+
+        //-------------------------
+        // Offline
+        //-------------------------
+
+        mqttClient.on("offline", function () {
+
+            console.log("MQTT Offline");
+
+            document.getElementById("lblStatus").innerHTML =
+                "<font color='orange'><b>Offline</b></font>";
+
+        });
+
+        //-------------------------
+        // Reconnect
+        //-------------------------
+
+        mqttClient.on("reconnect", function () {
+
+            console.log("Reconnect...");
+
+            document.getElementById("lblStatus").innerHTML =
+                "<font color='blue'><b>Reconnecting...</b></font>";
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <h2>LIGHT Sensor MQTT Dashboard</h2>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <td><b>MQTT Status</b></td>
+            <td id="lblStatus">Connecting...</td>
+        </tr>
+
+        <tr>
+            <td><b>Light Value</b></td>
+            <td id="lblValue">Waiting...</td>
+        </tr>
+
+        <tr>
+            <td><b>Updated</b></td>
+            <td id="lblUpdated">Waiting...</td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>

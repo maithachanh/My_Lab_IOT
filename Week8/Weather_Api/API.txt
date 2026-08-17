@@ -1,0 +1,2 @@
+Api Key: 7ed0868040a74a2ea3821027262907
+URL: https://api.weatherapi.com/v1/current.json?key=7ed0868040a74a2ea3821027262907&q=Ho_Chi_Minh
